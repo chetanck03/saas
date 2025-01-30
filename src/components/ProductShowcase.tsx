@@ -86,7 +86,7 @@ export const ProductShowcase = () => {
       },
       datalabels: {
         display: true,
-        formatter: (value) => `${value.toFixed(2)}%`,
+        // formatter: (value) => `${value.toFixed(2)}%`,
         color: "white",
         font: {
           weight: "bold",
