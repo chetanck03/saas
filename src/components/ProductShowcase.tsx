@@ -8,7 +8,6 @@ import {
   ArcElement,
   CategoryScale,
   LinearScale,
-  ChartContext,
 } from "chart.js";
 import { useState, useEffect, useRef } from "react";
 
@@ -57,8 +56,8 @@ export const ProductShowcase = () => {
         ],
         hoverOffset: 6,
         borderWidth: 2,
-        // Explicitly typing the 'context' parameter
-        borderColor: (context: ChartContext) => {
+        // Type 'any' for context to avoid TypeScript error
+        borderColor: (context: any) => {
           const index = context.dataIndex;
           return highlightedIndex === index ? "#FFFFFF" : "transparent"; // Highlight effect
         },
