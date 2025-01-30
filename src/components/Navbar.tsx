@@ -42,7 +42,7 @@ export const Navbar = () => {
 
           {/* Navigation Links */}
           <nav className="gap-6 items-center hidden sm:flex">
-            {["About", "Features", "Updates", "Help", "Customers"].map(
+            {["Home", "Features", "Token", "Docs", "Wallet","Faucet","API"].map(
               (item) => (
                 <a
                   key={item}
@@ -54,7 +54,7 @@ export const Navbar = () => {
               )
             )}
             <button className="bg-white py-2 px-4 rounded-lg font-medium">
-              Get for free
+              Contact Us
             </button>
           </nav>
 
@@ -76,7 +76,7 @@ export const Navbar = () => {
                 >
                   Close
                 </button>
-                {["About", "Features", "Updates", "Help", "Customers"].map(
+                {["Home", "Features", "Token", "Docs", "Wallet","Faucet","API"].map(
                   (item) => (
                     <a key={item} href="" className="text-white text-lg py-4">
                       {item}
@@ -84,7 +84,7 @@ export const Navbar = () => {
                   )
                 )}
                 <button className="mt-5 bg-white py-2 px-4 rounded-lg text-black font-semibold">
-                  Get for free
+                  Contact Us
                 </button>
               </motion.div>
             )}
