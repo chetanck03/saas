@@ -12,6 +12,7 @@ export default function Feature({
   title: string;
   description: string;
   backwardText: string; // This prop will be used for the backward text
+  icon:JSX.Element;
 }) {
   const offsetX = useMotionValue(-100);
   const offsetY = useMotionValue(-100);

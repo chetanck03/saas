@@ -1,46 +1,151 @@
 "use client";
-import Image from "next/image";
-import appScreen from "../assets/images/app-screen.png";
-import { motion, useScroll, useTransform } from "framer-motion";
-import { useRef } from "react";
+
+import { Pie } from "react-chartjs-2";
+import {
+  Chart as ChartJS,
+  Title,
+  Tooltip,
+  Legend,
+  ArcElement,
+  CategoryScale,
+  LinearScale,
+} from "chart.js";
+import { useEffect, useState, useRef } from "react";
+
+ChartJS.register(Title, Tooltip, Legend, ArcElement, CategoryScale, LinearScale);
 
 export const ProductShowcase = () => {
-  const imageRef = useRef<HTMLImageElement>(null);
-  const { scrollYProgress } = useScroll({
-    target: imageRef,
-    offset: ["start end", "end end"],
-  });
+  const [highlightedIndex, setHighlightedIndex] = useState(null);
+  const [chartSize, setChartSize] = useState(400); // Default size
+  const chartContainerRef = useRef(null);
 
-  const rotateX = useTransform(scrollYProgress, [0, 1], [30, 0]);
-  const opacity = useTransform(scrollYProgress, [0, 1], [0.5, 1]);
+  useEffect(() => {
+    const updateChartSize = () => {
+      if (chartContainerRef.current) {
+        setChartSize(Math.min(chartContainerRef.current.clientWidth * 0.7, 500));
+      }
+    };
+    updateChartSize();
+    window.addEventListener("resize", updateChartSize);
+    return () => window.removeEventListener("resize", updateChartSize);
+  }, []);
+
+  const data = {
+    labels: [
+      "Seed (0% TGE, 12 Months Lockup & 24 Months Linear Vesting)",
+      "Private (5% TGE, 12 Month Lockup & 24 Months Linear Vesting)",
+      "Public Sale (10% TGE, 3 Months Lockup & 12 Months Linear Vesting)",
+      "Team (0% TGE, 12 Months Lockup & 24 Months Linear Vesting)",
+      "Advisors (0% TGE, 12 Months Lockup & 24 Months Linear Vesting)",
+      "Community and Marketing (5% TGE, 0 Months Lockup & 60 Months Linear Vesting)",
+      "Treasury/Seed Network (100% TGE, 0 Months Lockup & 12 Months Linear Vesting)",
+      "Liquidity (10% TGE, 0 Months Lockup & 18 Months Linear Vesting)",
+    ],
+    datasets: [
+      {
+        data: [17.65, 17.65, 8.82, 11.76, 2.94, 23.53, 8.82, 8.82],
+        backgroundColor: [
+          "#FF8C00",
+          "#2E8B57",
+          "#4169E1",
+          "#DAA520",
+          "#8A2BE2",
+          "#FF6347",
+          "#32CD32",
+          "#FFD700",
+        ],
+        hoverOffset: 6,
+        borderWidth: 2,
+        borderColor: (context) => {
+          const index = context.dataIndex;
+          return highlightedIndex === index ? "#FFFFFF" : "transparent"; // Highlight effect
+        },
+      },
+    ],
+  };
+
+  const options = {
+    responsive: true,
+    maintainAspectRatio: false,
+    animation: {
+      duration: 1200, 
+      easing: "easeOutBounce",
+    },
+    plugins: {
+      tooltip: {
+        enabled: false, 
+      },
+      legend: {
+        display: true, 
+        position: "bottom",
+        labels: {
+          color: "white",
+          padding: 20,
+        },
+      },
+      datalabels: {
+        display: true,
+        formatter: (value) => `${value.toFixed(2)}%`,
+        color: "white",
+        font: {
+          weight: "bold",
+          size: 14,
+        },
+        align: "center",
+        anchor: "center",
+      },
+    },
+    onClick: (event, chartElement) => {
+      if (chartElement.length > 0) {
+        setHighlightedIndex(chartElement[0].index);
+      }
+    },
+  };
+
   return (
-    <div className="bg-black text-white bg-gradient-to-b from-black to-[#5D2CA8] py-[72px] sm:py-24 overflow-hidden">
-      <div className="container">
+    <div className="bg-black text-white bg-gradient-to-b from-black to-[#315BA7] py-16 sm:py-24 overflow-hidden">
+      <div className="container mx-auto px-4">
         <h2 className="text-center font-bold text-5xl sm:text-6xl tracking-tighter">
-          Intuitive interface
+          Token Allocation
         </h2>
-        <div className="max-w-xl mx-auto">
-          <p className="text-center text-xl text-white/70 mt-5">
-            Celebrate the joy of accomplishment with an app designed to track
-            your progress, motivate your efforts, and celebrate your successes,
-            one task at a time.
-          </p>
+        <p className="text-center text-xl text-white/70 mt-5 max-w-2xl mx-auto">
+          The liquidity amount will be locked in the DEX liquidity pool for a period of 12 months.
+        </p>
+
+        {/* Pie Chart & Details Section */}
+        <div className="flex flex-col sm:flex-row justify-center items-center t-1 gap-12">
+          {/* Pie Chart */}
+          <div ref={chartContainerRef} className="flex-1 flex justify-center items-center">
+            <div style={{ width: chartSize, height: chartSize }} className="relative ">
+              <Pie data={data} options={options} className="transition-transform transform hover:scale-105 ease-out duration-300" />
+              {/* Centered Text */}
+              <div className="absolute inset-0 flex items-center justify-center text-white font-bold text-lg sm:text-xl">
+                {/* Token Distribution */}
+              </div>
+            </div>
+          </div>
+
+          {/* Details */}
+          <div className="flex-1 space-y-5">
+            {data.labels.map((label, index) => (
+              <div
+                key={index}
+                className={`p-4 rounded-lg shadow-lg transition-all ease-in-out duration-300 cursor-pointer ${
+                  highlightedIndex === index ? "scale-105 bg-gray-700" : "bg-gray-800"
+                }`}
+                onClick={() => setHighlightedIndex(index)}
+              >
+                <div className="flex justify-between">
+                  <h3 className="text-xl font-semibold">{label.split(" ")[0]}</h3>
+                  <span className="text-lg font-semibold" style={{ color: data.datasets[0].backgroundColor[index] }}>
+                    {data.datasets[0].data[index]}%
+                  </span>
+                </div>
+                <p className="text-sm text-white/70 mt-2">{label}</p>
+              </div>
+            ))}
+          </div>
         </div>
-        <motion.div
-          style={{
-            opacity: opacity,
-            rotateX: rotateX,
-            transformPerspective: "800px",
-          }}
-          className="flex justify-center"
-        >
-          <Image
-            src={appScreen}
-            alt="The Product Screenshot"
-            className="mt-14"
-            ref={imageRef}
-          />
-        </motion.div>
       </div>
     </div>
   );

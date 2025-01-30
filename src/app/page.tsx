@@ -9,6 +9,7 @@ import { CallToAction } from "@/components/CallToAction";
 import { Footer } from "@/components/Footer";
 import { About } from "@/components/About";
 import { Roadmap } from "@/components/Roadmap";
+import { Team } from "@/components/Team";
 
 export default function Home() {
   return (
@@ -19,6 +20,7 @@ export default function Home() {
       <About/>
       <Features />
       <Roadmap/>
+      <Team/>
       <ProductShowcase />
       <FAQs />
       <CallToAction />
