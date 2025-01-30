@@ -27,7 +27,7 @@ export const Navbar = () => {
               alt="Kadesh logo"
               className="h-12 w-12 relative "
             />
-            <span className="ml-4 text-gray-50 font-bold text-2xl sm:text-3xl tracking-wider  drop-shadow-md">
+            <span className="ml-4 text-gray-50 font-bold text-2xl sm:text-3xl   drop-shadow-md">
               Kadesh
             </span>
           </div>

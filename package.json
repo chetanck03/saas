@@ -9,6 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@react-spring/web": "^9.7.5",
     "@splinetool/react-spline": "github:splinetool/react-spline",
     "clsx": "^2.1.1",
     "framer-motion": "^11.3.10",
@@ -16,6 +17,7 @@
     "next": "14.2.4",
     "react": "^18",
     "react-dom": "^18",
+    "react-icons": "^5.4.0",
     "styled-components": "^6.1.14"
   },
   "devDependencies": {

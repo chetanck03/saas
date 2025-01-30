@@ -3,6 +3,8 @@
 import { motion, useScroll, useTransform } from "framer-motion";
 import { useRef, useState } from "react";
 import { ChevronDown } from "lucide-react";
+import Image from "next/image";
+import appScreen from "../assets/images/img.png";
 
 export const About = () => {
   const imageRef = useRef<HTMLImageElement>(null);
@@ -11,17 +13,15 @@ export const About = () => {
     offset: ["start end", "end end"],
   });
 
-  // Animations
   const rotateX = useTransform(scrollYProgress, [0, 1], [30, 0]);
   const opacity = useTransform(scrollYProgress, [0, 1], [0.5, 1]);
   const fadeIn = { hidden: { opacity: 0, y: 50 }, visible: { opacity: 1, y: 0 } };
 
-  // State for expanding full text
   const [expanded, setExpanded] = useState(false);
+  const [isHovered, setIsHovered] = useState(false);
 
   return (
     <div className="relative bg-black py-16 sm:py-24 overflow-hidden">
-      {/* Floating Blur Effects */}
       <div className="absolute inset-0">
         <div className="absolute w-72 h-72 bg-[black] opacity-30 blur-3xl top-10 left-10"></div>
         <div className="absolute w-72 h-72 bg-[black] opacity-20 blur-3xl bottom-10 right-10"></div>
@@ -29,29 +29,30 @@ export const About = () => {
 
       <div className="container mx-auto px-6 relative z-10">
         <div className="flex flex-col sm:flex-row items-center gap-12">
-          {/* Right Side - Image with Hover Animation */}
+          {/* Left Side - Image with Hover Animation */}
           <motion.div
             style={{ opacity, rotateX, transformPerspective: "800px" }}
             className="flex-1 flex justify-center"
           >
-            <iframe
-              src="https://my.spline.design/nexbotrobotcharacterconcept-c2e29c44f2ae3db08d953c0061e2dea8/"
-              frameBorder="0"
-              width="100%"
-              height="400" // Adjust height for better mobile view
-              className="sm:w-[600px] sm:h-[600px] w-full h-64"
-              style={{
-                transform: "scale(0.9)",
-                position: "relative",
-                top: "-30px",
-                left: "0px",
-                objectFit: "contain", // Ensure the model fits within the bounds
-                overflow: "hidden",
-              }}
-            ></iframe>
+            <motion.div
+              whileHover={{ scale: 1.1 }}
+              onMouseEnter={() => setIsHovered(true)}
+              onMouseLeave={() => setIsHovered(false)}
+              animate={{ y: expanded ? 0 : [0, 20, 0] }}
+              transition={{ repeat: expanded ? 0 : Infinity, duration: 1.2 }}
+
+
+            >
+              <Image
+                ref={imageRef}
+                src={appScreen}
+                alt="Kadesh Image"
+                className="w-full max-w-sm rounded-lg shadow-lg"
+              />
+            </motion.div>
           </motion.div>
 
-          {/* Left Side - Text with Animated Fade-in */}
+          {/* Right Side - Text with Animated Fade-in */}
           <motion.div
             className="flex-1 text-center sm:text-left"
             initial="hidden"
@@ -63,14 +64,22 @@ export const About = () => {
             <h2 className="text-4xl sm:text-5xl font-extrabold tracking-tight text-white">
               About Kadesh
             </h2>
-            <h3 className="text-xl sm:text-2xl font-semibold text-[#315BA7] mt-4">
+            <motion.h3
+              className="text-xl sm:text-2xl font-semibold text-[#4671D5] mt-4"
+              onMouseEnter={() => setIsHovered(true)}
+              onMouseLeave={() => setIsHovered(false)}
+              whileHover={{ scale: 1.1 }}
+            >
               Why Choose Kadesh?
-            </h3>
-            <p className="text-lg text-gray-300 mt-4 leading-relaxed">
-              Welcome to <span className="font-bold text-[#315BA7]">Kadesh Chain</span> – a cutting-edge blockchain project revolutionizing the world of secure digital contracts.
+            </motion.h3>
+            <p
+              className={`text-lg mt-4 leading-relaxed transition-all ${
+                isHovered ? "text-yellow-400" : "text-gray-300"
+              }`}
+            >
+              Welcome to <span className="font-bold text-[#4671D5]">Kadesh Chain</span> – a cutting-edge blockchain project revolutionizing the world of secure digital contracts.
             </p>
 
-            {/* Expandable Section */}
             {expanded && (
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
@@ -84,13 +93,6 @@ export const About = () => {
                 </p>
                 <p className="text-lg text-gray-300 mt-4 leading-relaxed">
                   Our mission is to provide a seamless platform where users can confidently sign contracts, knowing their identities are verified through unique biometric characteristics.
-                </p>
-                <p className="text-lg text-gray-300 mt-4 leading-relaxed">
-                  With our innovative approach, we are eliminating intermediaries, reducing disputes, and streamlining the entire contract signing process.
-                </p>
-                <p className="text-lg text-gray-300 mt-4 leading-relaxed">
-                  Kadesh Chain also leverages blockchain to ensure contracts are tamper-proof and permanently recorded, offering an immutable record of agreements.
-                  Our platform has the potential to transform industries like real estate, finance, healthcare, and supply chain management.
                 </p>
               </motion.div>
             )}
