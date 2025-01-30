@@ -1,5 +1,5 @@
-"use client";
-
+"use client"
+import { useRef, useState, useEffect } from "react";
 import { Pie } from "react-chartjs-2";
 import {
   Chart as ChartJS,
@@ -10,14 +10,13 @@ import {
   CategoryScale,
   LinearScale,
 } from "chart.js";
-import { useEffect, useState, useRef } from "react";
 
 ChartJS.register(Title, Tooltip, Legend, ArcElement, CategoryScale, LinearScale);
 
 export const ProductShowcase = () => {
-  const [highlightedIndex, setHighlightedIndex] = useState(null);
-  const [chartSize, setChartSize] = useState(400); // Default size
-  const chartContainerRef = useRef(null);
+  const [highlightedIndex, setHighlightedIndex] = useState<number | null>(null);
+  const [chartSize, setChartSize] = useState<number>(400); // Default size
+  const chartContainerRef = useRef<HTMLDivElement | null>(null);  // Explicitly typing the ref
 
   useEffect(() => {
     const updateChartSize = () => {
@@ -68,15 +67,15 @@ export const ProductShowcase = () => {
     responsive: true,
     maintainAspectRatio: false,
     animation: {
-      duration: 1200, 
+      duration: 1200,
       easing: "easeOutBounce",
     },
     plugins: {
       tooltip: {
-        enabled: false, 
+        enabled: false,
       },
       legend: {
-        display: true, 
+        display: true,
         position: "bottom",
         labels: {
           color: "white",
@@ -112,27 +111,18 @@ export const ProductShowcase = () => {
           The liquidity amount will be locked in the DEX liquidity pool for a period of 12 months.
         </p>
 
-        {/* Pie Chart & Details Section */}
         <div className="flex flex-col sm:flex-row justify-center items-center t-1 gap-12">
-          {/* Pie Chart */}
           <div ref={chartContainerRef} className="flex-1 flex justify-center items-center">
             <div style={{ width: chartSize, height: chartSize }} className="relative ">
               <Pie data={data} options={options} className="transition-transform transform hover:scale-105 ease-out duration-300" />
-              {/* Centered Text */}
-              <div className="absolute inset-0 flex items-center justify-center text-white font-bold text-lg sm:text-xl">
-                {/* Token Distribution */}
-              </div>
             </div>
           </div>
 
-          {/* Details */}
           <div className="flex-1 space-y-5">
             {data.labels.map((label, index) => (
               <div
                 key={index}
-                className={`p-4 rounded-lg shadow-lg transition-all ease-in-out duration-300 cursor-pointer ${
-                  highlightedIndex === index ? "scale-105 bg-gray-700" : "bg-gray-800"
-                }`}
+                className={`p-4 rounded-lg shadow-lg transition-all ease-in-out duration-300 cursor-pointer ${highlightedIndex === index ? "scale-105 bg-gray-700" : "bg-gray-800"}`}
                 onClick={() => setHighlightedIndex(index)}
               >
                 <div className="flex justify-between">
