@@ -91,7 +91,7 @@ export const Hero = () => {
           animate={{ opacity: 1 }}
           transition={{ duration: 1, delay: 0.7 }}
         >
-          <a
+          <motion.a
             href="https://docs.kadeshchain.com/"
             className="bg-white text-black py-3 px-5 rounded-lg font-medium inline-flex items-center gap-2 transform transition-all duration-200 ease-in-out hover:scale-105"
             whileHover={{ scale: 1.1 }}
@@ -99,7 +99,7 @@ export const Hero = () => {
           >
             White Paper
             <ArrowWIcon />
-          </a>
+          </motion.a>
         </motion.div>
       </div>
     </div>
