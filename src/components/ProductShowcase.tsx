@@ -1,5 +1,4 @@
 "use client"
-import { useRef, useState, useEffect } from "react";
 import { Pie } from "react-chartjs-2";
 import {
   Chart as ChartJS,
@@ -9,14 +8,17 @@ import {
   ArcElement,
   CategoryScale,
   LinearScale,
+  ChartContext,
 } from "chart.js";
+import { useState, useEffect, useRef } from "react";
 
+// Registering the chart components
 ChartJS.register(Title, Tooltip, Legend, ArcElement, CategoryScale, LinearScale);
 
 export const ProductShowcase = () => {
   const [highlightedIndex, setHighlightedIndex] = useState<number | null>(null);
   const [chartSize, setChartSize] = useState<number>(400); // Default size
-  const chartContainerRef = useRef<HTMLDivElement | null>(null);  // Explicitly typing the ref
+  const chartContainerRef = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
     const updateChartSize = () => {
@@ -55,7 +57,8 @@ export const ProductShowcase = () => {
         ],
         hoverOffset: 6,
         borderWidth: 2,
-        borderColor: (context) => {
+        // Explicitly typing the 'context' parameter
+        borderColor: (context: ChartContext) => {
           const index = context.dataIndex;
           return highlightedIndex === index ? "#FFFFFF" : "transparent"; // Highlight effect
         },
@@ -94,7 +97,7 @@ export const ProductShowcase = () => {
         anchor: "center",
       },
     },
-    onClick: (event, chartElement) => {
+    onClick: (event: any, chartElement: any) => {
       if (chartElement.length > 0) {
         setHighlightedIndex(chartElement[0].index);
       }
