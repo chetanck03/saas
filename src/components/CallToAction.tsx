@@ -33,7 +33,7 @@ export const CallToAction = () => {
           />
         </motion.div>
         <h2 className="text-center text-5xl sm:text-6xl font-bold tracking-tighter">
-          Get instant access
+        Contact us for any enquiries or offers.
         </h2>
         <p className="text-xl text-white/70 mt-5">
           Celebrate the joy of accomplishment with an app designed to track your

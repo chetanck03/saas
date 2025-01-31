@@ -10,6 +10,7 @@ import { Footer } from "@/components/Footer";
 import { About } from "@/components/About";
 import { Roadmap } from "@/components/Roadmap";
 import { Team } from "@/components/Team";
+import { Partners } from "@/components/Partners";
 
 export default function Home() {
   return (
@@ -22,6 +23,7 @@ export default function Home() {
       <Roadmap/>
       <Team/>
       <ProductShowcase />
+      <Partners/>
       <FAQs />
       <CallToAction />
       <Footer />
