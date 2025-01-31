@@ -32,7 +32,7 @@ export const Partners = () => {
             initial={{ translateX: 0 }}
             animate={{ translateX: "-50%" }}
             transition={{
-              duration: 20,
+              duration: 7,
               ease: "linear",
               repeat: Infinity,
             }}
@@ -43,7 +43,7 @@ export const Partners = () => {
                 <Image
                   src={image.src}
                   alt={image.alt}
-                  className="h-full w-auto filter brightness-0 invert contrast-200 opacity-90 hover:opacity-100 transition-transform transform hover:scale-105 duration-300"
+                  className="h-full w-auto filter bg-white rounded-lg opacity-90 hover:opacity-100 transition-transform transform hover:scale-105 duration-300"
                 />
               </div>
             ))}

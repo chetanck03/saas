@@ -13,6 +13,7 @@ export const CallToAction = () => {
   });
   const translateY = useTransform(scrollYProgress, [0, 1], [40, -40]);
   return (
+    <section id="contact">
     <div
       className="bg-black text-white py-[72px] sm:py-24 text-center"
       ref={containerRef}
@@ -51,5 +52,6 @@ export const CallToAction = () => {
         </form>
       </div>
     </div>
+    </section>
   );
 };

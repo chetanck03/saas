@@ -7,6 +7,7 @@ import { motion } from "framer-motion";
 
 export const Hero = () => {
   return (
+    <section id="home">
     <div className="bg-black text-white bg-[linear-gradient(to_bottom,#000,#1E3A8A_34%,#315BA7_65%,#4671D5_82%)] py-[72px] sm:py-24 relative overflow-hidden">
       <div className="absolute h-[375px] w-[750px] sm:w-[1536px] sm:h-[768px] lg:w-[2400px] lg:h-[1200px] rounded-[100%] bg-black left-1/2 -translate-x-1/2 border-[#315BA7] bg-[radial-gradient(closest-side,#000000_82%,#4671D5)] top-[calc(100%-96px)] sm:top-[calc(100%-120px)]"></div>
       <div className="container relative">
@@ -90,5 +91,6 @@ export const Hero = () => {
         </motion.div>
       </div>
     </div>
+    </section>
   );
 };

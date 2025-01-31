@@ -1,150 +1,107 @@
-"use client";
-import { useState } from "react";
-import { useSpring, animated } from "@react-spring/web";
+import { FaCalendar, FaCheckCircle } from "react-icons/fa";
 
-// Dummy Data for Roadmap Phases
 const roadmapData = [
   {
-    title: "Phase 1",
-    description: "Initial Planning & Research",
-    date: "Q2 2024",
+    quarter: "Q3 2023",
+    items: [
+      'Blueprint preparation',
+    'Organizing the team',
+    'Planing of token allocation',
+    'Planning of tokenmetrics',
+    'Marketing strategy development'
+    ],
   },
-  { title: "Phase 2", description: "Design & Development", date: "Q2 2025" },
-  { title: "Phase 3", description: "Testing & Optimization", date: "Q3 2025" },
-  { title: "Phase 4", description: "Launch & Feedback", date: "Q4 2025" },
-  { title: "Phase 5", description: "Growth & Expansion", date: "Q1 2026" },
-  { title: "Phase 6", description: "Post-Launch Support", date: "Q2 2026" },
+  {
+    quarter: "Q4 2023",
+    items: [
+    'Building the website',
+    'Opening social media accounts',
+    'Marketing and advertising',
+    'Partnership Agreements',
+    'Press release'
+    ],
+  },
+  {
+    quarter: "Q1 2024",
+    items: [
+    'Kadesh Development Start',
+    'Kadesh Chain Testnet',
+    'Kadesh Chain Devnet',
+    'Kadesh Chain Explorer',
+    'Kadesh Wallet Beta'
+    ],
+  },
+  {
+    quarter: "Q2 2024",
+    items: [
+      'Auditing & Marketing',
+      'Presale',
+      'DEX listing',
+      'CMC & Coingecko listing'
+    ],
+  },
+  {
+    quarter: "Q3 2024",
+    items: [
+    'IEO & CEX Listings',
+    'Marketing Agreements',
+    'Kadesh App Beta Version',
+    'Press Release',
+    'Kadesh Chan Manate'
+    ],
+  },
+  {
+    quarter: "Q4 2024",
+    items: [
+     'CEX Listings',
+    'Marketing campaign',
+    'Kadesh App V2',
+    'Kadesh Chan Manate',
+    'Kadesh BioSmart API Release',
+    'Kadesh Will Release'
+    ],
+  },
 ];
 
 export const Roadmap = () => {
-  const [hovered, setHovered] = useState<number | null>(null);
-
-
-  // Spring animation for each roadmap step
-  const animation = useSpring({
-    opacity: 1,
-    transform: "translateY(0)",
-    from: { opacity: 0, transform: "translateY(50px)" },
-    reset: true,
-    reverse: hovered === null,
-  });
-
   return (
-    <div className="bg-black text-white py-24 sm:py-32 bg-gradient-to-b from-black to-[#315BA7]">
-      <div className="container mx-auto text-center">
-        <h2 className="text-4xl sm:text-5xl font-bold text-white tracking-tight mb-8">
+    <div className="min-h-screen bg-gradient-to-b from-black via-slate-900 to-black text-white py-[72px] sm:py-24">
+      <div className="container max-w-6xl mx-auto px-6">
+        <h2 className="text-center font-bold text-5xl sm:text-6xl tracking-tighter">
           Our Roadmap
         </h2>
-        <p className="text-lg sm:text-xl text-white/70 mb-12">
-          We work around the clock for our project, our investors, and our
-          users.
-        </p>
+        <div className="max-w-xl mx-auto">
+          <p className="text-center mt-5 text-xl text-white/70">
+            Discover the milestones we aim to achieve in the upcoming quarters as we build our ecosystem.
+          </p>
+        </div>
 
-        <div className="relative overflow-hidden">
-          {/* Infinite Horizontal Scroll Container */}
-          <div className="flex space-x-24 animate-scroll">
-            {/* Map through roadmap data and render phases */}
-            {roadmapData.map((item, index) => (
-              <div
-                key={index}
-                className="relative flex-shrink-0"
-                onMouseEnter={() => setHovered(index)}
-                onMouseLeave={() => setHovered(null)}
-              >
-                {/* Circle for Phase */}
-                <animated.div
-                  style={animation}
-                  className="w-16 h-16 bg-[#315BA7] text-white rounded-full flex justify-center items-center border-4 cursor-pointer z-10"
-                >
-                  <span className="font-bold text-lg">{index + 1}</span>
-                </animated.div>
-
-                {/* Phase Details */}
-                <div className="mt-4 text-center">
-                  <h3 className="text-xl font-semibold mb-2">{item.title}</h3>
-                  <p className="text-lg mb-4">{item.description}</p>
-                  <p className="text-sm text-gray-300">{item.date}</p>
+        {/* Responsive Grid Layout */}
+        <div className="mt-16 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+          {roadmapData.map((phase, index) => (
+            <div
+              key={phase.quarter}
+              className="bg-slate-800/50 backdrop-blur-sm rounded-xl p-6 border border-slate-700 hover:border-blue-500 transition-all duration-300 transform hover:scale-105"
+            >
+              <div className="flex items-center gap-2 mb-4">
+                <div className="w-8 h-8 rounded-full bg-blue-500 flex items-center justify-center">
+                  <FaCalendar className="text-white text-2xl" />
                 </div>
-
-                {/* Connecting Line for All Phases (except last one) */}
-                {index < roadmapData.length - 1 && (
-                  <div className="absolute top-1/2 left-full w-16 h-[2px] bg-white/20"></div>
-                )}
+                <h3 className="text-xl font-semibold text-blue-400">{phase.quarter}</h3>
               </div>
-            ))}
 
-            {/* Clone the items for continuous loop */}
-            {roadmapData.map((item, index) => (
-              <div
-                key={`clone-${index}`}
-                className="relative flex-shrink-0"
-                onMouseEnter={() => setHovered(index)}
-                onMouseLeave={() => setHovered(null)}
-              >
-                {/* Circle for Phase */}
-                <animated.div
-                  style={animation}
-                  className="w-16 h-16 bg-[#315BA7] text-white rounded-full flex justify-center items-center border-4 cursor-pointer z-10"
-                >
-                  <span className="font-bold text-lg">{index + 1}</span>
-                </animated.div>
-
-                {/* Phase Details */}
-                <div className="mt-4 text-center">
-                  <h3 className="text-xl font-semibold mb-2">{item.title}</h3>
-                  <p className="text-lg mb-4">{item.description}</p>
-                  <p className="text-sm text-gray-300">{item.date}</p>
-                </div>
-
-                {/* Connecting Line for Cloned Phases */}
-                {index < roadmapData.length - 1 && (
-                  <div className="absolute top-1/2 left-full w-16 h-[2px] bg-white/20"></div>
-                )}
+              <div className="space-y-3">
+                {phase.items.map((item, itemIndex) => (
+                  <div key={itemIndex} className="flex items-start gap-2">
+                    <FaCheckCircle className="w-4 h-4 mt-1 text-blue-400" />
+                    <p className="text-blue-300">{item}</p>
+                  </div>
+                ))}
               </div>
-            ))}
-          </div>
+            </div>
+          ))}
         </div>
       </div>
-
-      {/* Styles for infinite scrolling effect */}
-      <style jsx>{`
-        .animate-scroll {
-          animation: scroll 9s linear infinite;
-        }
-
-        @keyframes scroll {
-          0% {
-            transform: translateX(0);
-          }
-          25% {
-            transform: translateX(-25%);
-          }
-          50% {
-            transform: translateX(-50%);
-          }
-          75% {
-            transform: translateX(-75%);
-          }
-          100% {
-            transform: translateX(-100%);
-          }
-        }
-        /* Adjusting text size for larger description */
-        .description {
-          font-size: 18px; /* You can adjust the size here */
-          line-height: 1.5; /* Adjust line height for readability */
-        }
-
-        /* Ensure the clone phases are seamlessly connected */
-        .animate-scroll {
-          display: flex;
-          flex-direction: row;
-        }
-
-        .animate-scroll > div {
-          margin-right: 50px;
-        }
-      `}</style>
     </div>
   );
 };

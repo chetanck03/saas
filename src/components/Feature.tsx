@@ -12,7 +12,7 @@ export default function Feature({
   title: string;
   description: string;
   backwardText: string; // This prop will be used for the backward text
-  icon:JSX.Element;
+  icon: JSX.Element;
 }) {
   const offsetX = useMotionValue(-100);
   const offsetY = useMotionValue(-100);
@@ -36,7 +36,7 @@ export default function Feature({
   return (
     <div
       ref={cardRef}
-      className="relative border border-white/30 px-5 py-10 text-center rounded-xl overflow-hidden cursor-pointer transform-gpu transition-transform duration-500"
+      className="relative perspective-1000px w-full max-w-sm mx-auto border border-white/30 px-5 py-10 text-center rounded-xl overflow-hidden cursor-pointer transform-gpu transition-all duration-700"
     >
       <motion.div
         className="absolute inset-0 border-2 border-purple-400 rounded-xl"
@@ -55,13 +55,12 @@ export default function Feature({
 
       {/* Back Text - Hidden by default, shown on hover */}
       <div
-        className="absolute inset-0  flex items-center justify-center text-white bg-black bg-opacity-70 p-5 rounded-xl opacity-0 transform rotate-y-180 transition-opacity duration-500"
+        className="absolute inset-0 flex items-center justify-center text-white bg-black bg-opacity-70 p-5 rounded-xl opacity-0 transform rotate-y-180 transition-all duration-700"
         style={{
           transformStyle: "preserve-3d",
-
         }}
       >
-        <p className="text-center ">{backwardText}</p>
+        <p className="text-center">{backwardText}</p>
       </div>
 
       {/* Hover Effect */}
@@ -69,14 +68,12 @@ export default function Feature({
         .relative:hover .absolute {
           opacity: 1;
           transform: rotateY(180deg);
-          background-color:black;
-          
+          background-color: black;
         }
         .relative:hover {
           transform: rotateY(180deg);
+          transform-origin: center;
         }
-        
-        
       `}</style>
     </div>
   );

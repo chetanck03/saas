@@ -11,7 +11,7 @@ const teamMembers = [
     name: "Serhat Onay",
     title: "CEO",
     description: "Marketing and growth specialist, international business advisor.",
-    linkedin: "#",
+    linkedin: "https://www.linkedin.com/in/serhatonay-kadeshchain/",
     twitter: "#",
     image: "/members/first.png", // Use relative paths from /public
   },
@@ -19,7 +19,7 @@ const teamMembers = [
     name: "Vytautas Kaseta",
     title: "CIO",
     description: "Web3 & Metaverse builder, Blockchain architect, Cryptoeconomy guru, DeFi analyst.",
-    linkedin: "#",
+    linkedin: "https://www.linkedin.com/in/ministras/",
     twitter: "#",
     image: "/members/second.png",
   },
@@ -27,7 +27,7 @@ const teamMembers = [
     name: "Emrah Kozan",
     title: "COO",
     description: "Educator, professional speaker, Digital transformation specialist.",
-    linkedin: "#",
+    linkedin: "https://www.linkedin.com/in/emrahkozan/",
     twitter: "#",
     image: "/members/third.png",
   },
@@ -35,7 +35,7 @@ const teamMembers = [
     name: "Linas Butenas",
     title: "CSO",
     description: "Blockchain architect, Scientist, AI and Data mining expert.",
-    linkedin: "#",
+    linkedin: "https://www.linkedin.com/in/linas-butenas/",
     twitter: "#",
     image: "/members/fourth.png",
   },
@@ -43,7 +43,7 @@ const teamMembers = [
     name: "Volkan Celiktepe",
     title: "CGO",
     description: "Localization expert, international relations and business specialist.",
-    linkedin: "#",
+    linkedin: "https://www.linkedin.com/in/volkan-celiktepe/",
     twitter: "#",
     image: "/members/five.png",
   },
@@ -67,7 +67,7 @@ export const Team = () => {
   const fadeIn = { hidden: { opacity: 0, y: 50 }, visible: { opacity: 1, y: 0 } };
 
   return (
-    <div className="relative bg-black py-16 sm:py-24 overflow-hidden transition-all duration-300 ease-in-out">
+    <div className="relative bg-gradient-to-b from-black via-slate-900 to-black py-16 sm:py-24 overflow-hidden transition-all duration-300 ease-in-out">
       {/* Background Effects */}
       <div className="absolute inset-0">
         <div className="absolute w-72 h-72 bg-gray-900 opacity-30 blur-3xl top-10 left-10"></div>
@@ -82,8 +82,8 @@ export const Team = () => {
         variants={fadeIn}
         className="text-center text-white"
       >
-        <h2 className="text-4xl font-bold tracking-wide leading-tight">Meet the Team</h2>
-        <p className="mt-4 text-lg opacity-80">
+        <h2 className="text-5xl sm:text-6xl font-bold tracking-tighter leading-tight">Meet the Team</h2>
+        <p className="mt-4 text-lg text-white/70">
           Our team is composed of highly skilled professionals with diverse backgrounds and expertise.
         </p>
       </motion.div>
@@ -97,7 +97,7 @@ export const Team = () => {
             whileInView="visible"
             viewport={{ once: true }}
             variants={fadeIn}
-            className="bg-gray-900 p-8 rounded-xl shadow-lg hover:shadow-2xl hover:scale-105 transform transition-all duration-300 ease-in-out hover:bg-gray-700 border-4 border-transparent hover:border-gradient-to-r hover:border-blue-500 hover:border-opacity-60"
+            className="bg-slate-800/50 backdrop-blur-sm rounded-xl p-8 border border-slate-700 hover:border-blue-500 transition-all duration-300 transform hover:scale-105"
           >
             <div className="flex flex-col items-center text-center">
               {isClient && (
@@ -109,9 +109,9 @@ export const Team = () => {
                   className="w-32 h-32 rounded-full object-cover border-4 border-gradient-to-r from-blue-500 to-green-500 mb-6 transition-all duration-300 ease-in-out"
                 />
               )}
-              <h3 className="text-2xl font-semibold text-white">{member.name}</h3>
-              <p className="text-gray-400">{member.title}</p>
-              <p className="mt-3 text-gray-300">{member.description}</p>
+              <h3 className="text-2xl font-semibold text-blue-400">{member.name}</h3>
+              <p className="text-gray-300">{member.title}</p>
+              <p className="mt-3 text-white/70">{member.description}</p>
               <div className="flex mt-5 space-x-6">
                 <a
                   href={member.linkedin}

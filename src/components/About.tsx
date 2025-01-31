@@ -68,13 +68,12 @@ export const About = () => {
               className="text-xl sm:text-2xl font-semibold text-[#4671D5] mt-4"
               onMouseEnter={() => setIsHovered(true)}
               onMouseLeave={() => setIsHovered(false)}
-              whileHover={{ scale: 1.1 }}
             >
               Why Choose Kadesh?
             </motion.h3>
             <p
               className={`text-lg mt-4 leading-relaxed transition-all ${
-                isHovered ? "text-yellow-400" : "text-gray-300"
+                isHovered ? "text-gray-300" : "text-gray-300"
               }`}
             >
               Welcome to <span className="font-bold text-[#4671D5]">Kadesh Chain</span> – a cutting-edge blockchain project revolutionizing the world of secure digital contracts.
