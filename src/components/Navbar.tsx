@@ -1,6 +1,6 @@
 "use client";
 import Image from "next/image";
-import logoImage from "../assets/images/logosaas.png";
+import logoImage from "../assets/images/logo.png";
 import MenuIcon from "../assets/icons/menu.svg";
 import { motion, AnimatePresence } from "framer-motion";
 import { useState } from "react";
