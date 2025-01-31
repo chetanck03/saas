@@ -1,10 +1,23 @@
-"use client";
+"use client"
 import React from "react";
 import PlusIcon from "../assets/icons/plus.svg";
 import MinusIcon from "../assets/icons/minus.svg";
 import { motion, AnimatePresence } from "framer-motion";
 
-const items = {
+// Define types for FAQ items
+interface FAQItem {
+  question: string;
+  answer: string;
+}
+
+interface Items {
+  general: FAQItem[];
+  privateSaleAndIDO: FAQItem[];
+  token: FAQItem[];
+}
+
+// Define the items object with the specific type
+const items: Items = {
   general: [
     {
       question: "What is a blockchain?",
@@ -68,7 +81,6 @@ const items = {
       answer:
         "Private sale buyers will receive their tokens on a schedule. 10% of the total amount of tokens purchased for each within 10 months following the pre-sale process.",
     },
-    
   ],
   token: [
     {
@@ -107,11 +119,6 @@ const AccordionItem = ({ question, answer, isOpen, setIsOpen }: { question: stri
             {answer}
           </motion.div>
         )}
-        {!isOpen && (
-          <div className="text-gray-300 mt-2 h-0 overflow-hidden">
-            {answer}
-          </div>
-        )}
       </AnimatePresence>
     </div>
   );
@@ -119,9 +126,9 @@ const AccordionItem = ({ question, answer, isOpen, setIsOpen }: { question: stri
 
 export const FAQs = () => {
   const [openSection, setOpenSection] = React.useState<string | null>(null);
-  const [selectedCategory, setSelectedCategory] = React.useState<string | null>("general");
+  const [selectedCategory, setSelectedCategory] = React.useState<"general" | "privateSaleAndIDO" | "token">("general");
 
-  const handleCategoryChange = (category: string) => {
+  const handleCategoryChange = (category: "general" | "privateSaleAndIDO" | "token") => {
     setSelectedCategory(category);
     setOpenSection(null); // Reset accordion state when changing category
   };
@@ -157,16 +164,15 @@ export const FAQs = () => {
 
         {/* FAQ Section */}
         <div className="mt-12 max-w-[1200px] mx-auto grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {selectedCategory &&
-            items[selectedCategory].map(({ question, answer }) => (
-              <AccordionItem
-                key={question}
-                question={question}
-                answer={answer}
-                isOpen={openSection === question}
-                setIsOpen={(value) => setOpenSection(value ? question : null)}
-              />
-            ))}
+          {items[selectedCategory].map(({ question, answer }) => (
+            <AccordionItem
+              key={question}
+              question={question}
+              answer={answer}
+              isOpen={openSection === question}
+              setIsOpen={(value) => setOpenSection(value ? question : null)}
+            />
+          ))}
         </div>
       </div>
     </div>
