@@ -17,7 +17,8 @@ const roadmapData = [
 ];
 
 export const Roadmap = () => {
-  const [hovered, setHovered] = useState(null);
+  const [hovered, setHovered] = useState<number | null>(null);
+
 
   // Spring animation for each roadmap step
   const animation = useSpring({

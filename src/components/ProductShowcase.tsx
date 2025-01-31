@@ -10,6 +10,11 @@ import {
   LinearScale,
 } from "chart.js";
 import { useState, useEffect, useRef } from "react";
+import { ChartOptions } from "chart.js";
+import ChartDataLabels from "chartjs-plugin-datalabels";
+ChartJS.register(ChartDataLabels);
+
+
 
 // Registering the chart components
 ChartJS.register(Title, Tooltip, Legend, ArcElement, CategoryScale, LinearScale);
@@ -65,12 +70,13 @@ export const ProductShowcase = () => {
     ],
   };
 
-  const options = {
+
+  const options: ChartOptions<"pie"> = {
     responsive: true,
     maintainAspectRatio: false,
     animation: {
       duration: 1200,
-      easing: "easeOutBounce",
+      easing: "easeOutBounce" as "easeOutBounce", // Explicitly assert type
     },
     plugins: {
       tooltip: {
@@ -86,7 +92,6 @@ export const ProductShowcase = () => {
       },
       datalabels: {
         display: true,
-        // formatter: (value) => `${value.toFixed(2)}%`,
         color: "white",
         font: {
           weight: "bold",
@@ -102,6 +107,7 @@ export const ProductShowcase = () => {
       }
     },
   };
+  
 
   return (
     <div className="bg-black text-white bg-gradient-to-b from-black to-[#315BA7] py-16 sm:py-24 overflow-hidden">
@@ -113,7 +119,7 @@ export const ProductShowcase = () => {
           The liquidity amount will be locked in the DEX liquidity pool for a period of 12 months.
         </p>
 
-        {/* <div className="flex flex-col sm:flex-row justify-center items-center t-1 gap-12">
+        <div className="flex flex-col sm:flex-row justify-center items-center t-1 gap-12">
           <div ref={chartContainerRef} className="flex-1 flex justify-center items-center">
             <div style={{ width: chartSize, height: chartSize }} className="relative ">
               <Pie data={data} options={options} className="transition-transform transform hover:scale-105 ease-out duration-300" />
@@ -137,7 +143,7 @@ export const ProductShowcase = () => {
               </div>
             ))}
           </div>
-        </div> */}
+        </div>
       </div>
     </div>
   );
