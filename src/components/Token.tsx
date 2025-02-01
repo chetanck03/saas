@@ -1,14 +1,6 @@
 "use client"
 import { Pie } from "react-chartjs-2";
-import {
-  Chart as ChartJS,
-  Title,
-  Tooltip,
-  Legend,
-  ArcElement,
-  CategoryScale,
-  LinearScale,
-} from "chart.js";
+import { Chart as ChartJS, Title, Tooltip, Legend, ArcElement, CategoryScale, LinearScale } from "chart.js";
 import { useState, useEffect, useRef } from "react";
 import { ChartOptions } from "chart.js";
 import ChartDataLabels from "chartjs-plugin-datalabels";
@@ -18,19 +10,32 @@ ChartJS.register(Title, Tooltip, Legend, ArcElement, CategoryScale, LinearScale)
 
 export const Token = () => {
   const [highlightedIndex, setHighlightedIndex] = useState<number | null>(null);
-  const [chartSize, setChartSize] = useState<number>(500); // Increased size
+  const [chartSize, setChartSize] = useState<number>(500); // Default chart size
   const chartContainerRef = useRef<HTMLDivElement | null>(null);
 
+  // Function to update chart size based on container width
+  const updateChartSize = () => {
+    if (chartContainerRef.current) {
+      // Calculate the size based on screen width but don't let it exceed a max size.
+      const newSize = Math.min(
+        chartContainerRef.current.clientWidth * 0.7, // 70% of container width
+        500 // Max size limit
+      );
+      setChartSize(newSize);
+    }
+  };
+
+  // UseEffect to handle resize and orientation change
   useEffect(() => {
-    const updateChartSize = () => {
-      if (chartContainerRef.current) {
-        setChartSize(Math.min(chartContainerRef.current.clientWidth * 0.7, 500));
-      }
+    updateChartSize(); // Set initial size
+    window.addEventListener("resize", updateChartSize); // Listen for window resize events
+    window.addEventListener("orientationchange", updateChartSize); // Listen for orientation change
+
+    return () => {
+      window.removeEventListener("resize", updateChartSize); // Cleanup
+      window.removeEventListener("orientationchange", updateChartSize);
     };
-    updateChartSize();
-    window.addEventListener("resize", updateChartSize);
-    return () => window.removeEventListener("resize", updateChartSize);
-  }, []);
+  }, []); // Empty dependency array ensures this runs only on mount and unmount
 
   const data = {
     labels: [
@@ -57,10 +62,10 @@ export const Token = () => {
           "#FFD700",
         ],
         hoverOffset: 6,
-        borderWidth: 6, // Thicker borders for a more professional look
+        borderWidth: 6, // Thicker borders
         borderColor: (context: any) => {
           const index = context.dataIndex;
-          return highlightedIndex === index ? "white" : "transparent"; // Highlight effect
+          return highlightedIndex === index ? "white" : "transparent";
         },
       },
     ],
@@ -86,7 +91,7 @@ export const Token = () => {
         },
       },
       datalabels: {
-        display: false, // Removed the percentage display
+        display: false,
       },
     },
     onClick: (event: any, chartElement: any) => {
@@ -98,7 +103,7 @@ export const Token = () => {
 
   return (
     <section id="token">
-      <div className="bg-gradient-to-b from-black to-[#315BA7] py-16 sm:py-24 overflow-hidden">
+      <div className="bg-black py-16 sm:py-24 overflow-hidden">
         <div className="container mx-auto px-4">
           <h2 className="text-center font-bold text-5xl sm:text-6xl text-white tracking-tighter">
             Token Allocation
@@ -109,8 +114,15 @@ export const Token = () => {
 
           <div className="flex flex-col sm:flex-row justify-center items-center gap-12 mt-12">
             <div ref={chartContainerRef} className="flex-1 flex justify-center items-center">
-              <div style={{ width: chartSize, height: chartSize }} className="relative ">
-                <Pie data={data} options={options} className="transition-transform transform hover:scale-105 ease-out duration-300" />
+              <div
+                style={{ width: chartSize, height: chartSize }}
+                className="relative"
+              >
+                <Pie
+                  data={data}
+                  options={options}
+                  className="transition-transform transform hover:scale-105 ease-out duration-300"
+                />
               </div>
             </div>
 
@@ -118,12 +130,23 @@ export const Token = () => {
               {data.labels.map((label, index) => (
                 <div
                   key={index}
-                  className={`p-6 rounded-lg shadow-lg transition-all ease-in-out duration-300 cursor-pointer ${highlightedIndex === index ? "scale-105 bg-gray-700" : "bg-gray-800"}`}
+                  className={`p-3 rounded-lg shadow-lg transition-all ease-in-out duration-300 cursor-pointer ${
+                    highlightedIndex === index
+                      ? "scale-105 bg-gray-800"
+                      : "bg-gray-900"
+                  }`}
                   onClick={() => setHighlightedIndex(index)}
                 >
                   <div className="flex justify-between items-center">
-                    <h3 className="text-xl font-semibold text-white">{label.split(" ")[0]}</h3>
-                    <span className="text-lg font-semibold" style={{ color: data.datasets[0].backgroundColor[index] }}>
+                    <h3 className="text-xl font-semibold text-white">
+                      {label.split(" ")[0]}
+                    </h3>
+                    <span
+                      className="text-lg font-semibold"
+                      style={{
+                        color: data.datasets[0].backgroundColor[index],
+                      }}
+                    >
                       {data.datasets[0].data[index]}%
                     </span>
                   </div>

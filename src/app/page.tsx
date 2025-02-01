@@ -10,17 +10,20 @@ import { Roadmap } from "@/components/Roadmap";
 import { Team } from "@/components/Team";
 import { Partners } from "@/components/Partners";
 
+// import { LogoTicker } from "@/components/LogoTicker";
+
 export default function Home() {
   return (
     <>
       <Navbar />
       <Hero />
+      {/* <LogoTicker/> */}
+      <Partners/>
       <About/>
       <Features />
       <Roadmap/>
       <Team/>
       <Token />
-      <Partners/>
       <FAQs />
       <CallToAction />
       <Footer />

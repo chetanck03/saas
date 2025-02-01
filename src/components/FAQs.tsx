@@ -98,6 +98,7 @@ const items: Items = {
 
 const AccordionItem = ({ question, answer, isOpen, setIsOpen }: { question: string; answer: string; isOpen: boolean; setIsOpen: (value: boolean) => void }) => {
   return (
+    
     <div
       onClick={() => setIsOpen(!isOpen)}
       key={question}
@@ -134,6 +135,7 @@ export const FAQs = () => {
   };
 
   return (
+    <section id= "faq">
     <div className="bg-black text-white py-[72px] sm:py-24">
       <div className="container">
         <h2 className="text-center text-5xl sm:text-6xl sm:max-w-[648px] mx-auto font-bold tracking-tighter">
@@ -176,5 +178,6 @@ export const FAQs = () => {
         </div>
       </div>
     </div>
+    </section>
   );
 };

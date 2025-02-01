@@ -67,7 +67,7 @@ export const Team = () => {
   const fadeIn = { hidden: { opacity: 0, y: 50 }, visible: { opacity: 1, y: 0 } };
 
   return (
-    <div className="relative bg-gradient-to-b from-black via-slate-900 to-black py-16 sm:py-24 overflow-hidden transition-all duration-300 ease-in-out">
+    <div className="relative bg-black py-16 sm:py-24 overflow-hidden transition-all duration-300 ease-in-out">
       {/* Background Effects */}
       <div className="absolute inset-0">
         <div className="absolute w-72 h-72 bg-gray-900 opacity-30 blur-3xl top-10 left-10"></div>
@@ -82,7 +82,7 @@ export const Team = () => {
         variants={fadeIn}
         className="text-center text-white"
       >
-        <h2 className="text-5xl sm:text-6xl font-bold tracking-tighter leading-tight">Meet the Team</h2>
+        <h2 className="text-5xl sm:text-6xl font-bold tracking-tighter leading-tight">Meet The Team</h2>
         <p className="mt-4 text-lg text-white/70">
           Our team is composed of highly skilled professionals with diverse backgrounds and expertise.
         </p>
@@ -97,7 +97,7 @@ export const Team = () => {
             whileInView="visible"
             viewport={{ once: true }}
             variants={fadeIn}
-            className="bg-slate-800/50 backdrop-blur-sm rounded-xl p-8 border border-slate-700 hover:border-blue-500 transition-all duration-300 transform hover:scale-105"
+            className="bg-black p-6 rounded-xl border border-slate-700 hover:border-blue-600 transition-all duration-300 transform hover:scale-105 relative"
           >
             <div className="flex flex-col items-center text-center">
               {isClient && (
@@ -106,10 +106,10 @@ export const Team = () => {
                   alt={member.name}
                   width={128}
                   height={128}
-                  className="w-32 h-32 rounded-full object-cover border-4 border-gradient-to-r from-blue-500 to-green-500 mb-6 transition-all duration-300 ease-in-out"
+                  className="w-32 h-32 rounded-full object-cover border-4 border-gradient-to-r from-blue-600 to-green-500 mb-6 transition-all duration-300 ease-in-out"
                 />
               )}
-              <h3 className="text-2xl font-semibold text-blue-400">{member.name}</h3>
+              <h3 className="text-2xl font-semibold text-blue-600">{member.name}</h3>
               <p className="text-gray-300">{member.title}</p>
               <p className="mt-3 text-white/70">{member.description}</p>
               <div className="flex mt-5 space-x-6">
@@ -119,7 +119,7 @@ export const Team = () => {
                   rel="noopener noreferrer"
                   className="transition-all hover:scale-110"
                 >
-                  <FaLinkedin className="w-7 h-7 text-blue-400 hover:text-blue-600" />
+                  <FaLinkedin className="w-7 h-7 text-blue-500 hover:text-blue-600" />
                 </a>
                 <a
                   href={member.twitter}
@@ -127,9 +127,14 @@ export const Team = () => {
                   rel="noopener noreferrer"
                   className="transition-all hover:scale-110"
                 >
-                  <FaTwitter className="w-7 h-7 text-blue-300 hover:text-blue-500" />
+                  <FaTwitter className="w-7 h-7 text-blue-500 hover:text-blue-600" />
                 </a>
               </div>
+
+              {/* Connecting line between cards
+              {index < teamMembers.length - 1 && (
+                <div className="absolute top-0 left-[100%] h-full w-[2px] bg-blue-500 transform translate-x-[10px]"></div>
+              )} */}
             </div>
           </motion.div>
         ))}

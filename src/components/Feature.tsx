@@ -47,7 +47,7 @@ export default function Feature({
         ref={border}
       ></motion.div>
 
-      <div className="inline-flex h-14 w-14 bg-white text-black justify-center items-center rounded-lg">
+      <div className="inline-flex h-14 w-14  text-black justify-center items-center rounded-lg">
         {icon}
       </div>
       <h3 className="mt-6 font-bold">{title}</h3>

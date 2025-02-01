@@ -1,3 +1,30 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/* Targeting the scrollbar */
+/* Global Scrollbar Styles */
+/* Targeting the scrollbar */
+::-webkit-scrollbar {
+    width: 12px; /* Set the width of the scrollbar */
+    height: 12px; /* Set the height of the horizontal scrollbar */
+  }
+  
+  /* Scrollbar Thumb (the draggable part) */
+  /* Simple and Thin Scrollbar */
+::-webkit-scrollbar {
+    width: 6px; /* Make the scrollbar thinner */
+    height: 6px; /* Thin horizontal scrollbar */
+  }
+  
+  /* Scrollbar Thumb (the draggable part) */
+  ::-webkit-scrollbar-thumb {
+    background-color: linear-gradient(to bottom, #000000, #1e293b, #000000); /* Light gray thumb */
+    border-radius: 10px; /* Slightly rounded edges for the thumb */
+  }
+  
+  /* Scrollbar Track (the track the thumb moves on) */
+  ::-webkit-scrollbar-track {
+    background-color: rgba(22, 21, 21, 0.1); /* Light track color */
+  }
+  
