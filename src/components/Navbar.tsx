@@ -69,7 +69,7 @@ export const Navbar: React.FC<NavbarProps> = () => {
 
           {/* Navigation Links */}
           <nav className="gap-6 items-center hidden sm:flex bg-black">
-            {[{ name: "Home", href: "home" }, { name: "Features", href: "features" }, { name: "Token", href: "token" },{ name: "Docs", href: "token" },{ name: "Faq", href: "faq" } ,{name: "Explorer", href: "https://kadeshchain.com/Explorer" }].map((item) => (
+            {[{ name: "Home", href: "home" }, { name: "Features", href: "features" }, { name: "Token", href: "token" },{ name: "Docs", href: "https://docs.kadeshchain.com/docs/Overview" },{ name: "Faq", href: "faq" } ,{name: "Explorer", href: "https://kadeshchain.com/Explorer" }].map((item) => (
               <a
                 key={item.name}
                 onClick={(e) => {
@@ -157,7 +157,7 @@ export const Navbar: React.FC<NavbarProps> = () => {
                 >
                   Close
                 </button>
-                {[{ name: "Home", href: "home" }, { name: "Features", href: "features" }, { name: "Token", href: "token" }, { name: "Docs", href: "https://docs.kadeshchain.com/" },{ name: "Faq", href: "faq" } , { name: "Explorer", href: "https://kadeshchain.com/Explorer" }, { name: "Wallet", href: "https://kadeshchain.com/Wallet" }, { name: "Faucet", href: "https://kadeshchain.com/Faucet" }, { name: "API", href: "api" }]
+                {[{ name: "Home", href: "home" }, { name: "Features", href: "features" }, { name: "Token", href: "token" }, { name: "Docs", href: "https://docs.kadeshchain.com/docs/Overview" },{ name: "Faq", href: "faq" } , { name: "Explorer", href: "https://kadeshchain.com/Explorer" }, { name: "Wallet", href: "https://kadeshchain.com/Wallet" }, { name: "Faucet", href: "https://kadeshchain.com/Faucet" }, { name: "API", href: "api" }]
                   .map((item) => (
                     <a
                       key={item.name}

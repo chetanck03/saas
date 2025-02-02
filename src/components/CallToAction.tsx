@@ -1,57 +1,69 @@
 "use client";
-import helixImage from "../assets/images/helix2.png";
-import emojiStarImage from "../assets/images/emojistar.png";
-import Image from "next/image";
-import { motion, useScroll, useTransform } from "framer-motion";
 import { useRef } from "react";
+import { Mail, MapPin } from "lucide-react";
 
 export const CallToAction = () => {
   const containerRef = useRef<HTMLDivElement>(null);
-  const { scrollYProgress } = useScroll({
-    target: containerRef,
-    offset: ["start end", "end end"],
-  });
-  const translateY = useTransform(scrollYProgress, [0, 1], [40, -40]);
+
   return (
     <section id="contact">
-    <div
-      className="bg-black text-white py-[72px] sm:py-24 text-center"
-      ref={containerRef}
-    >
-      <div className="container max-w-xl relative">
-        <motion.div style={{ translateY }}>
-          <Image
-            src={helixImage}
-            alt="Helix"
-            className="absolute top-6 left-[calc(100%+36px)]"
-          />
-        </motion.div>
-        <motion.div style={{ translateY }}>
-          <Image
-            src={emojiStarImage}
-            alt="Emoji star"
-            className="absolute -top-[120px] right-[calc(100%+24px)]"
-          />
-        </motion.div>
-        <h2 className="text-center text-5xl sm:text-6xl font-bold tracking-tighter">
-        Contact us for any enquiries or offers.
-        </h2>
-        <p className="text-xl text-white/70 mt-5">
-          Celebrate the joy of accomplishment with an app designed to track your
-          progress and motivate your efforts.
-        </p>
-        <form className="flex flex-col gap-2.5 mt-10 max-w-sm mx-auto sm:flex-row">
-          <input
-            type="email"
-            placeholder="your@email.com"
-            className="h-12 bg-white/20 rounded-lg px-5 font-medium placeholder:text-[#9CA3AF] sm:flex-1"
-          />
-          <button className="h-12 bg-white text-black text-xl rounded-lg px-5">
-            Get access
-          </button>
-        </form>
+      <div className="bg-black text-white py-20 sm:py-24">
+        <div
+          className="container max-w-5xl mx-auto px-6 sm:px-0 flex flex-col sm:flex-row items-center sm:items-start gap-12"
+          ref={containerRef}
+        >
+          {/* Left Section - Contact Info */}
+          <div className="w-full sm:w-1/2">
+            <h2 className="text-4xl sm:text-5xl font-extrabold tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-blue-500 to-cyan-600">
+              Contact Us
+            </h2>
+            <p className="text-lg text-white/80 mt-4">
+              Contact us for any enquiries or offers.
+            </p>
+
+            <div className="mt-8 space-y-5">
+              <div className="flex items-center gap-4">
+                <Mail className="text-blue-500 w-6 h-6" />
+                <p className="text-lg">contact@kadeshchain.com</p>
+              </div>
+              <div className="flex items-center gap-4">
+                <MapPin className="text-blue-500 w-6 h-6" />
+                <p className="text-lg">Muratpasa, Antalya</p>
+              </div>
+            </div>
+          </div>
+
+          {/* Right Section - Contact Form */}
+          <div className="w-full sm:w-1/2 bg-white/10 backdrop-blur-lg p-6 sm:p-8 rounded-xl shadow-lg border border-white/20">
+            <form className="flex flex-col gap-4">
+              <input
+                type="text"
+                placeholder="Name*"
+                className="h-12 bg-black text-white border border-white/20 rounded-lg px-5 placeholder:text-gray-400 focus:ring-2 focus:ring-blue-500 outline-none"
+                required
+              />
+              <input
+                type="email"
+                placeholder="Email*"
+                className="h-12 bg-black text-white border border-white/20 rounded-lg px-5 placeholder:text-gray-400 focus:ring-2 focus:ring-blue-500 outline-none"
+                required
+              />
+              <textarea
+                placeholder="Message*"
+                rows={4}
+                className="bg-black text-white border border-white/20 rounded-lg px-5 py-3 placeholder:text-gray-400 focus:ring-2 focus:ring-blue-500 outline-none"
+                required
+              />
+              <button
+                type="submit"
+                className="h-12 bg-gradient-to-r from-blue-600 to-cyan-600 text-white text-lg font-semibold rounded-lg hover:opacity-80 transition duration-300"
+              >
+                Send Message
+              </button>
+            </form>
+          </div>
+        </div>
       </div>
-    </div>
     </section>
   );
 };

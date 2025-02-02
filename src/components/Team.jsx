@@ -67,6 +67,7 @@ export const Team = () => {
   const fadeIn = { hidden: { opacity: 0, y: 50 }, visible: { opacity: 1, y: 0 } };
 
   return (
+    <section id ="team">
     <div className="relative bg-black py-16 sm:py-24 overflow-hidden transition-all duration-300 ease-in-out">
       {/* Background Effects */}
       <div className="absolute inset-0">
@@ -140,5 +141,6 @@ export const Team = () => {
         ))}
       </div>
     </div>
+    </section>
   );
 };

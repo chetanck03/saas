@@ -28,3 +28,9 @@
     background-color: rgba(22, 21, 21, 0.1); /* Light track color */
   }
   
+  html {
+    scroll-behavior: smooth;
+  }
+  
+
+  

@@ -73,6 +73,7 @@ const roadmapData: RoadmapItem[] = [
 
 export const Roadmap = () => {
   return (
+    <section id="roadmap">
     <div className="min-h-screen bg-black via-slate-900 to-black text-white py-[72px] sm:py-24">
       <div className="container max-w-6xl mx-auto px-6">
         <h2 className="text-center font-bold text-5xl sm:text-6xl tracking-tighter">
@@ -116,5 +117,6 @@ export const Roadmap = () => {
         </div>
       </div>
     </div>
+    </section>
   );
 };

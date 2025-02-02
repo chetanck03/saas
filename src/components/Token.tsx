@@ -13,29 +13,26 @@ export const Token = () => {
   const [chartSize, setChartSize] = useState<number>(500); // Default chart size
   const chartContainerRef = useRef<HTMLDivElement | null>(null);
 
-  // Function to update chart size based on container width
   const updateChartSize = () => {
     if (chartContainerRef.current) {
-      // Calculate the size based on screen width but don't let it exceed a max size.
       const newSize = Math.min(
-        chartContainerRef.current.clientWidth * 0.7, // 70% of container width
-        500 // Max size limit
+        chartContainerRef.current.clientWidth * 0.7,
+        500
       );
       setChartSize(newSize);
     }
   };
 
-  // UseEffect to handle resize and orientation change
   useEffect(() => {
-    updateChartSize(); // Set initial size
-    window.addEventListener("resize", updateChartSize); // Listen for window resize events
-    window.addEventListener("orientationchange", updateChartSize); // Listen for orientation change
+    updateChartSize();
+    window.addEventListener("resize", updateChartSize);
+    window.addEventListener("orientationchange", updateChartSize);
 
     return () => {
-      window.removeEventListener("resize", updateChartSize); // Cleanup
+      window.removeEventListener("resize", updateChartSize);
       window.removeEventListener("orientationchange", updateChartSize);
     };
-  }, []); // Empty dependency array ensures this runs only on mount and unmount
+  }, []);
 
   const data = {
     labels: [
@@ -52,17 +49,10 @@ export const Token = () => {
       {
         data: [17.65, 17.65, 8.82, 11.76, 2.94, 23.53, 8.82, 8.82],
         backgroundColor: [
-          "#FF8C00",
-          "#2E8B57",
-          "#4169E1",
-          "#DAA520",
-          "#8A2BE2",
-          "#FF6347",
-          "#32CD32",
-          "#FFD700",
+          "#FF8C00", "#2E8B57", "#4169E1", "#DAA520", "#8A2BE2", "#FF6347", "#32CD32", "#FFD700",
         ],
         hoverOffset: 6,
-        borderWidth: 6, // Thicker borders
+        borderWidth: 6,
         borderColor: (context: any) => {
           const index = context.dataIndex;
           return highlightedIndex === index ? "white" : "transparent";
@@ -74,30 +64,14 @@ export const Token = () => {
   const options: ChartOptions<"pie"> = {
     responsive: true,
     maintainAspectRatio: true,
-    animation: {
-      duration: 1200,
-      easing: "easeOutBounce",
-    },
+    animation: { duration: 1200, easing: "easeOutBounce" },
     plugins: {
-      tooltip: {
-        enabled: false,
-      },
-      legend: {
-        display: false,
-        position: "bottom",
-        labels: {
-          color: "#FFF",
-          padding: 20,
-        },
-      },
-      datalabels: {
-        display: false,
-      },
+      tooltip: { enabled: false },
+      legend: { display: false, position: "bottom", labels: { color: "#FFF", padding: 20 } },
+      datalabels: { display: false },
     },
     onClick: (event: any, chartElement: any) => {
-      if (chartElement.length > 0) {
-        setHighlightedIndex(chartElement[0].index);
-      }
+      if (chartElement.length > 0) setHighlightedIndex(chartElement[0].index);
     },
   };
 
@@ -112,21 +86,14 @@ export const Token = () => {
             The liquidity amount will be locked in the DEX liquidity pool for a period of 12 months.
           </p>
 
-          <div className="flex flex-col sm:flex-row justify-center items-center gap-12 mt-12">
-            <div ref={chartContainerRef} className="flex-1 flex justify-center items-center">
-              <div
-                style={{ width: chartSize, height: chartSize }}
-                className="relative"
-              >
-                <Pie
-                  data={data}
-                  options={options}
-                  className="transition-transform transform hover:scale-105 ease-out duration-300"
-                />
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-12 mt-12">
+            <div ref={chartContainerRef} className="flex justify-center items-center col-span-1 lg:col-span-2">
+              <div style={{ width: chartSize, height: chartSize }} className="relative">
+                <Pie data={data} options={options} className="transition-transform transform hover:scale-105 ease-out duration-300" />
               </div>
             </div>
 
-            <div className="flex-1 space-y-6">
+            <div className="col-span-1 space-y-6">
               {data.labels.map((label, index) => (
                 <div
                   key={index}
@@ -138,9 +105,7 @@ export const Token = () => {
                   onClick={() => setHighlightedIndex(index)}
                 >
                   <div className="flex justify-between items-center">
-                    <h3 className="text-xl font-semibold text-white">
-                      {label.split(" ")[0]}
-                    </h3>
+                    <h3 className="text-xl font-semibold text-white">{label.split(" ")[0]}</h3>
                     <span
                       className="text-lg font-semibold"
                       style={{

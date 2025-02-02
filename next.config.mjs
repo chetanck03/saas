@@ -19,6 +19,16 @@ const nextConfig = {
         issuer: fileLoaderRule.issuer,
         resourceQuery: { not: [...fileLoaderRule.resourceQuery.not, /url/] }, // exclude if *.svg?url
         use: ["@svgr/webpack"],
+      },
+      // Add support for GLSL shaders (for Three.js, if needed)
+      {
+        test: /\.(glsl|vs|fs)$/,
+        use: "raw-loader",
+      },
+      // Ensure Three.js modules work correctly
+      {
+        test: /node_modules\/three\/examples\/jsm\//,
+        use: "babel-loader",
       }
     );
 
@@ -26,6 +36,9 @@ const nextConfig = {
     fileLoaderRule.exclude = /\.svg$/i;
 
     return config;
+  },
+  experimental: {
+    esmExternals: "loose", // Ensures Three.js modules load properly
   },
 };
 

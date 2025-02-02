@@ -1,3 +1,5 @@
+"use client";
+
 import { Navbar } from "@/components/Navbar";
 import { Hero } from "@/components/Hero";
 import { Features } from "@/components/Features";
@@ -9,20 +11,22 @@ import { About } from "@/components/About";
 import { Roadmap } from "@/components/Roadmap";
 import { Team } from "@/components/Team";
 import { Partners } from "@/components/Partners";
+import { AnimationCanvas } from "@/components/AnimationCanvas";
 
-// import { LogoTicker } from "@/components/LogoTicker";
 
+// Main Home Component
 export default function Home() {
   return (
     <>
+      {/* <AnimationCanvas /> Background Animation */}
+      {/* <AnimationCanvas/> */}
       <Navbar />
       <Hero />
-      {/* <LogoTicker/> */}
-      <Partners/>
-      <About/>
+      <Partners />
+      <About />
       <Features />
-      <Roadmap/>
-      <Team/>
+      <Roadmap />
+      <Team />
       <Token />
       <FAQs />
       <CallToAction />
